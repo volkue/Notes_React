@@ -1,47 +1,62 @@
 import React, { useState } from 'react';
+import AddIcon from '@mui/icons-material/Add';
+import Fab from '@mui/material/Fab';
+import Zoom from '@mui/material/Zoom';
 
-function AddNote() {
+function AddNote(props) {
     const [newNote, setNewNote] = useState({
+
         title: "",
         content: ""
     });
-    const [newNotes, setNewNotes] = useState([]);
+    const [isExpanded, setIsExpanded] = useState(false);
     function createNote(e) {
         const { name, value } = e.target;
         setNewNote((prev) => {
-            if (name === "title") {
-                return {
-                    title: value,
-                    content: prev.content
-                }
+            // if (name === "title") {
+            //     return {
+            //         title: value,
+            //         content: prev.content
+            //     }
+            // }
+            // else if (name === "content") {
+            //     return {
+            //         title: prev.title,
+            //         content: value
+            //     }
+            // }
+            return {
+                ...prev,
+                [name]: value
             }
-            else if (name === "content") {
-                return {
-                    title: prev.title,
-                    content: value
-                }
-            }
+
         });
     }
-    function addNewNotes(e) {
-        setNewNotes((prev) => {
-            return [...prev, newNote];
-        });
+    function submitNote(e) {
+        props.onAdd(newNote);
+        setNewNote({
+            title: "",
+            content: ""
+        })
         e.preventDefault();
 
+
     }
-    console.log(newNotes)
-    return (<div className='note'>
-        <form >
-            <input type="text" name="title" placeholder="Title" onChange={createNote} value={newNote.title} />
-            <input type="text" name="content" placeholder="Take a note" onChange={createNote} value={newNote.content} />
-            <button type="submit" onClick={
-                addNewNotes
-            }>
-                <span>Add</span>
-            </button>
+    function expand() {
+        setIsExpanded(true);
+    }
+    return (<div>
+        <form className="create-note">
+            {isExpanded && <input type="text" name="title" placeholder="Title" onChange={createNote} value={newNote.title} />}
+            <textarea name="content" placeholder="Take a note" onChange={createNote} value={newNote.content} rows={isExpanded ? 3 : 1}
+                onClick={expand}
+            />
+            {isExpanded && <Zoom in={true} >
+                <Fab type="submit" onClick={submitNote}>
+                    <AddIcon />
+                </Fab>
+            </Zoom>}
         </form>
-        <input></input>
     </div>)
 }
 
