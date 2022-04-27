@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/notes_react/static/js/main.a6c49760.js",
-    "index.html": "/notes_react/index.html",
-    "main.a6c49760.js.map": "/notes_react/static/js/main.a6c49760.js.map"
+    "main.js": "/Notes_React/static/js/main.a6c49760.js",
+    "index.html": "/Notes_React/index.html",
+    "main.a6c49760.js.map": "/Notes_React/static/js/main.a6c49760.js.map"
   },
   "entrypoints": [
     "static/js/main.a6c49760.js"
